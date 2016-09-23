@@ -1,0 +1,31 @@
+2016-09-23 18:39:57,275 [Worker-16] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: br.ufal.ic:iface-with-spring:0.0.1-SNAPSHOT @ C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\pom.xml.
+2016-09-23 18:39:57,275 [Worker-13] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: br.ufal.ic:iface-with-spring:0.0.1-SNAPSHOT @ C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\pom.xml.
+2016-09-23 18:40:02,410 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 18:40:02,430 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\main\resources
+2016-09-23 18:40:02,432 [Worker-13] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 18:40:02,436 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\test\resources
+2016-09-23 18:40:05,657 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: br.ufal.ic:iface-with-spring:0.0.1-SNAPSHOT @ C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\pom.xml.
+2016-09-23 18:40:06,220 [Worker-14] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 18:40:06,225 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\main\resources
+2016-09-23 18:40:06,227 [Worker-14] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 18:40:06,231 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\test\resources
+2016-09-23 18:40:07,715 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 18:40:07,719 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\main\resources
+2016-09-23 18:40:07,721 [Worker-11] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 18:40:07,725 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\test\resources
+2016-09-23 18:57:49,575 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 18:57:49,581 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\main\resources
+2016-09-23 18:57:49,583 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 18:57:49,589 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\test\resources
+2016-09-23 19:00:06,533 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 19:00:06,539 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\main\resources
+2016-09-23 19:00:06,542 [Worker-28] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 19:00:06,548 [Worker-28] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\test\resources
+2016-09-23 19:00:32,969 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 19:00:32,976 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\main\resources
+2016-09-23 19:00:32,980 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 19:00:32,994 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\test\resources
+2016-09-23 19:00:34,174 [Worker-29] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 19:00:34,201 [Worker-29] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\main\resources
+2016-09-23 19:00:34,205 [Worker-29] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-09-23 19:00:34,212 [Worker-29] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\marco\Desktop\iface-forum\folderOfWork\iface-with-spring\src\test\resources

@@ -1,0 +1,8 @@
+127.0.0.1 - - [23/Sep/2016:18:57:54 -0300] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [23/Sep/2016:18:57:55 -0300] "GET /iface-with-spring/WEB-INF/views/boasVindas.jsp HTTP/1.1" 404 992
+127.0.0.1 - - [23/Sep/2016:18:59:48 -0300] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [23/Sep/2016:18:59:49 -0300] "GET /iface-with-spring/ HTTP/1.1" 200 656
+0:0:0:0:0:0:0:1 - - [23/Sep/2016:18:59:53 -0300] "GET /iface-with-spring/sistema/boasvindas?nome= HTTP/1.1" 404 992
+127.0.0.1 - - [23/Sep/2016:19:00:55 -0300] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [23/Sep/2016:19:00:55 -0300] "GET /iface-with-spring/ HTTP/1.1" 200 656
+0:0:0:0:0:0:0:1 - - [23/Sep/2016:19:01:02 -0300] "GET /iface-with-spring/sistema/boasvindas?nome=%20te%20amo%20Ely HTTP/1.1" 200 365
