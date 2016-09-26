@@ -1,0 +1,30 @@
+<html>
+  <head>
+  <title> Topic </title>
+  </head>
+  <body>
+        <h2> List of topics </h2>
+        <div th:unless="${#lists.isEmpty(topics)}">
+              <dl th:each="topic : ${topics}">
+                    <dt class="topicHeadline">
+                          <span th:text="${topic.title}">Title</span>    
+                    </dt>
+                    <dd class="topicDescription">
+                          <span th:if="${topic.description}" th:text="${topic.description}">Description</span>
+                          <span th:if="${topic.description eq null}"> No description... </span>
+                    </dd>
+              </dl>
+        </div>
+        <div th:if="${#lists.isEmpty(topic)}">
+              <p> No registered topics </p>
+        </div>
+        <hr />
+        <h3> Topic Registration: </h3>
+        <form method="POST">
+              <label for="title"> Title: </label> <input type="text" name="title" size="50"></input><br /><br />  
+              <label for="description">Description:</label><br />
+              <textarea name="description" cols="80" rows="5"> </textarea>
+              <!--   <br /> <input type="submit"></input> -->
+        </form>
+  </body>
+  </html>

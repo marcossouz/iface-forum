@@ -1,0 +1,34 @@
+<html>
+  <head>
+  <title> Community </title>
+  </head>
+  <body>
+        <h2> List of communities by manager </h2>
+        <div th:unless="${#lists.isEmpty(communities)}">
+              <dl th:each="community : ${communities}">
+                    <dt class="communityHeadline">
+                          <span th:text="${community.title}">Title</span> created by <span
+                                th:text="${community.manager}">Manager</span> (Categoria: <span
+                                th:text="${community.category}"> Categoria </span>)
+                                 
+                    </dt>
+                    <dd class="communityDescription">
+                          <span th:if="${community.description}" th:text="${community.description}">Description</span>
+                          <span th:if="${community.description eq null}"> No description... </span>
+                    </dd>
+              </dl>
+        </div>
+        <div th:if="${#lists.isEmpty(communities)}">
+              <p> No registered communities </p>
+        </div>
+        <hr />
+        <h3> Community Registration: </h3>
+        <form method="POST">
+              <label for="title"> Title: </label> <input type="text" name="title" size="50"></input><br /><br />  
+              <label for="category"> Category: </label> <input type="text" name="category" size="15"></input><br /> <br />
+              <label for="description">Description:</label><br />
+              <textarea name="description" cols="80" rows="5"> </textarea>
+              <!--  <br /> <input type="submit"></input> -->
+        </form>
+  </body>
+  </html>
