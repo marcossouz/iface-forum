@@ -1,7 +1,6 @@
 <html ng-app=''>
 <head>
 <title>Community</title>
-<script src="/webjars/angularjs/1.5.8/angular.min.js"></script>
   </head>
   <body>
         <h2> List of communities by manager </h2>
@@ -24,12 +23,17 @@
         </div>
         <hr />
         <h3> Community Registration: </h3>
-        <form method="POST">
-              <label for="title"> Title: </label> <input type="text" name="title" size="50"></input><br /><br />  
-              <label for="category"> Category: </label> <input type="text" name="category" size="15"></input><br /> <br />
+        <form name="form" method="POST">
+        	<div>
+              <label for="title"> Title: </label> <input type="text" name="title" ng-model="community.title" size="50" required = ""></input><br /><br />  
+              <label for="category"> Category: </label> <input type="text" name="category" ng-model="community.category" size="15" required = ""></input><br /> <br />
               <label for="description">Description:</label><br />
-              <textarea name="description" cols="80" rows="5"> </textarea>
-              <!--  <br /> <input type="submit"></input> -->
+              <textarea name="description" ng-model="community.description" cols="80" rows="5" required = "" ng-minlength="5"> </textarea>
+              <span class="error" ng-show="form.description.$error.minlength">No minimo 5 caracteres!</span>
+             
+              <!--  <br />  <input type="submit" ng-disabled="form.$invalid"></input> -->
+       		</div>
         </form>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   </body>
   </html>
