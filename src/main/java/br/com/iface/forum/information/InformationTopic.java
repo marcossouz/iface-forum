@@ -1,17 +1,16 @@
 package br.com.iface.forum.information;
 
+import br.com.iface.forum.model.User;
+
 public class InformationTopic {
 	
-	private int user;
+	private User user;
 	private int idCommunity;
 	private int idTopic;
 	
-	public int getUser() {
+	public User getUser() {
 		return user;
 	}
-	public void setUser(int user) {
-		this.user = user;
-	}	
 	public int getIdCommunity() {
 		return idCommunity;
 	}

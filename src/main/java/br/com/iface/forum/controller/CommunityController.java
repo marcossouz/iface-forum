@@ -1,5 +1,6 @@
 package br.com.iface.forum.controller;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,45 +11,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.iface.forum.information.InformationTopic;
 import br.com.iface.forum.model.Community;
+import br.com.iface.forum.service.CommunityService;
 
 @Controller
 @RestController
 public class CommunityController {
-	private static int idCommunity = 1;
-	private static ArrayList<Community> communities = new ArrayList<Community>();
-	
-	public static ArrayList<Community> cbi(int idUser){
-		ArrayList<Community> myCommunities = new ArrayList<Community>();
-		for(int i=0;i<idCommunity-1;i++){
-			if(communities.get(i).getIdCreator() == idUser){
-				myCommunities.add(communities.get(i));
-			}
-		}
-		return myCommunities;
-	}
+		
+	@Autowired
+	CommunityService communityService;
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/community",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void addCommunity(@RequestBody Community community){
-		communities.add(community);
+		communityService.addCommunity(community);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET,value="/removeCommunity",consumes = MediaType.APPLICATION_JSON_VALUE)	
+	public void removeCommunity(@RequestBody Community community){
+		communityService.removeCommunity(community);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/myComunities",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<Community>> communitiesByIdUser(@RequestBody int idUser){
-		ArrayList<Community> myCommunities = new ArrayList<Community>();
-		for(int i=0;i<communities.size();i++){
-			if(communities.get(i).getIdCreator() == idUser){
-				myCommunities.add(communities.get(i));
-			}
-		}
-		return new ResponseEntity<>(myCommunities,HttpStatus.OK);
+		return new ResponseEntity<>(communityService.communitiesByIdUser(idUser),HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value = "/othersCommunities",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<Community>> searchOthersCommunities(@RequestBody int idUser){
 		ArrayList<Community> others = new ArrayList<Community>();
-		ArrayList<Community> myCommunities = cbi(idUser);
-		boolean aux;
-		
+		ArrayList<Community> myCommunities = communityService.CommunityByCreator(idUser);
+		ArrayList<Community> communities = communityService.allCommunity();
+		boolean aux;		
 		for(int i=0;i<communities.size();i++){
 			aux = false;
 			for(int j=0;j<myCommunities.size();j++){
@@ -66,16 +58,18 @@ public class CommunityController {
 	
 	@RequestMapping(method = RequestMethod.GET,value="/Allpermissions",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ArrayList<Integer>> allPermissions(@RequestBody int idCommunity){
+		ArrayList<Community> communities = communityService.allCommunity();
 		idCommunity--;
 		return new ResponseEntity<>(communities.get(idCommunity).getPermissions(),HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/Mypermissions",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Integer> permissionById(@RequestBody InformationTopic Information){
-		ArrayList<Integer> myPermissions = communities.get(idCommunity).getPermissions();	
+		ArrayList<Community> communities = communityService.allCommunity();
+		ArrayList<Integer> myPermissions = communities.get(Information.getIdCommunity()).getPermissions();	
 		Integer answer;
 		for(int i=0;i<myPermissions.size();i++){
-			if(myPermissions.get(i)== Information.getUser()){
+			if(myPermissions.get(i)== Information.getUser().getId()){
 				answer = 1;
 				break;
 			}
@@ -85,10 +79,11 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/creator",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public ResponseEntity<Integer> creatorById(@RequestBody int idUser){	
+	public ResponseEntity<Integer> creatorById(@RequestBody InformationTopic information){	
+		ArrayList<Community> communities = communityService.allCommunity();
 		Integer answer;
-		for(int i=0;i<idCommunity-1;i++){
-			if(communities.get(i).getIdCreator() == idUser){
+		for(int i=0;i<information.getIdCommunity()-1;i++){
+			if(communities.get(i).getIdCreator() == information.getUser().getId()){
 				answer = 1;
 				break;
 			}
@@ -98,28 +93,28 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/communityId",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public ResponseEntity<Community> returnCommunity(@RequestBody int idCommunity){
-		return new ResponseEntity<>(communities.get(idCommunity),HttpStatus.OK);
+	public ResponseEntity<Community> returnCommunity(@RequestBody InformationTopic information){
+		return new ResponseEntity<>(information.getUser().getCommunity(information.getIdCommunity()),HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/addPermission",consumes = MediaType.APPLICATION_JSON_VALUE)	
 	public void addPermission(@RequestBody InformationTopic Information){
-		communities.get(Information.getIdCommunity()).addPermission(Information.getUser());
+		Information.getUser().getCommunity(Information.getIdCommunity()).addPermission(Information.getUser().getId());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/removePermission",consumes = MediaType.APPLICATION_JSON_VALUE)	
 	public void removePermission(@RequestBody InformationTopic Information){
-		communities.get(Information.getIdCommunity()).removePermission(Information.getUser());
+		communityService.removePermission(Information.getUser().getId(),Information.getUser().getCommunity(Information.getIdCommunity()));
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/addMember",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public void addMember(@RequestBody int idUser){
-		communities.get(idCommunity).addMember(idUser);
+	public void addMember(@RequestBody InformationTopic Information){
+		Information.getUser().getCommunity(Information.getIdCommunity()).addMember(Information.getUser().getId());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/removeMember",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public void removeMember(@RequestBody int idUser){
-		communities.get(idCommunity).removeMember(idUser);
+	public void removeMember(@RequestBody InformationTopic Information){
+		communityService.removeMember(Information.getUser().getId(),Information.getUser().getCommunity(Information.getIdCommunity()));
 	}
 
 }

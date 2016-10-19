@@ -1,21 +1,70 @@
 package br.com.iface.forum.model;
 import  java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class Question extends Topic{
+@Entity
+public class Question{
 
-	private ArrayList<AnswersQuestion> answers = new ArrayList<AnswersQuestion>();
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ANS_SEQ")
+	private int idTopic;
+	private int idCreator;
+	private String description;;
+	private String title;
+	private ArrayList<Integer> answers = new ArrayList<Integer>();
 	
-	public void newAnswer(int id, int idArticle, int idForum, int user, String comment){
-		AnswersQuestion newAnswer = new AnswersQuestion();
-		newAnswer.setComment(comment);
-		newAnswer.setId(id);
-		newAnswer.setIdForum(idForum);
-		newAnswer.setUser(user);
-		newAnswer.setIdQuestion(idArticle);
-		answers.add(newAnswer);
+	public int getIdTopic() {
+		return idTopic;
+	}
+
+	public void setIdTopic(int idTopic) {
+		this.idTopic = idTopic;
+	}
+
+	public int getIdCreator() {
+		return idCreator;
+	}
+
+	public void setIdCreator(int idCreator) {
+		this.idCreator = idCreator;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setAnswers(ArrayList<Integer> answers) {
+		this.answers = answers;
+	}
+
+	public void setAnswer(ArrayList<Integer> answer) {
+		this.answers = answer;
+	}
+
+	public void newAnswer(Integer answer){
+		answers.add(answer);
 	}
 	
-	public ArrayList<AnswersQuestion> getAnswers(){
+	public void removeAnswer(Integer answer){
+		answers.remove(answer);
+	}
+		
+	public ArrayList<Integer> getAnswer(){
 		return this.answers;
 	}
 }

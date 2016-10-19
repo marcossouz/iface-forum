@@ -1,9 +1,11 @@
 package br.com.iface.forum.controller;
-import br.com.iface.forum.information.InformationTopic;
-import br.com.iface.forum.information.RegisterArticle;
 import br.com.iface.forum.model.Article;
-import br.com.iface.forum.model.User;
+import br.com.iface.forum.model.Community;
+import br.com.iface.forum.service.ArticleService;
+import br.com.iface.forum.service.QuestionService;
+import br.com.iface.forum.service.TopicService;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,27 +19,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ArticleController {
 
+	@Autowired
+	ArticleService articleService;
+	
+	@Autowired
+	TopicService topicService;
+	
+	@Autowired 
+	QuestionService questionService;
+	
 	@RequestMapping(method = RequestMethod.GET,value = "/article",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Article> SendArticle(@RequestBody InformationTopic articleInformations){
-		Article article = User.sendArticle(articleInformations.getIdCommunity(), articleInformations.getIdTopic());
+	public ResponseEntity<Article> SendArticle(@RequestBody int idArticle){
+		Article article = articleService.sendArticle(idArticle);
 		return new ResponseEntity<>(article,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/articles", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<Article>> allArticles(@RequestBody InformationTopic articleInformation){
-		ArrayList<Article> articles = User.allArticle(articleInformation.getIdCommunity());
+	public ResponseEntity<ArrayList<Article>> allArticles(@RequestBody Community community){
+		ArrayList<Article> articles = articleService.allArticle(community);
 		return new ResponseEntity<>(articles,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/article",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void addArticle(@RequestBody RegisterArticle article){
-		User.addArticle(article);
+	public void addArticle(@RequestBody Article article){
+		articleService.addArticle(article);
 	}
-	
-	@RequestMapping(method = RequestMethod.GET,value = "/myArticles", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<Article>> myArticles(@RequestBody InformationTopic information){
-		ArrayList<Article> articles = User.myArticles(information.getIdCommunity());
-		return new ResponseEntity<>(articles,HttpStatus.OK);
-	}	
 	
 }
