@@ -2,14 +2,13 @@ package br.com.iface.forum.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Answers {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ANS_SEQ")
+	@GeneratedValue
 	int id;
 	int idType;
 	int idForum;

@@ -93,7 +93,7 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/communityId",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public ResponseEntity<Community> returnCommunity(@RequestBody InformationTopic information){
+	public ResponseEntity<Integer> returnCommunity(@RequestBody InformationTopic information){
 		return new ResponseEntity<>(information.getUser().getCommunity(information.getIdCommunity()),HttpStatus.OK);
 	}
 	

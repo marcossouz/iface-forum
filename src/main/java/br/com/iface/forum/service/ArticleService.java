@@ -12,8 +12,14 @@ public class ArticleService {
 
 	@Autowired
 	ArticleRepository articleRepository;
+	
+	@Autowired
+	CommunityService communityService;
 		
-	public void addArticle(Article article){
+	public void addArticle(Article article, int idCommunity){
+		Community community = communityService.sendCommunity(idCommunity);
+		community.addArticle(article.getIdTopic());
+		communityService.addCommunity(community);
 		articleRepository.save(article);
 	}
 	

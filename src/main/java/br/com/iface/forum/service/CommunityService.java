@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.iface.forum.model.Article;
 import br.com.iface.forum.model.Community;
-import br.com.iface.forum.model.Question;
-import br.com.iface.forum.model.TopicCommon;
 import br.com.iface.forum.repository.CommunityRepository;
 
 @Service
@@ -26,6 +24,13 @@ public class CommunityService {
 	public Community sendCommunity(int idCommunity){
 		return communityRepository.findOne(idCommunity);
 	}
+	public void addMember(int idMember, int idCommunity){
+		Community community = sendCommunity(idCommunity);
+		community.addMember(idMember);
+		addCommunity(community);
+		communityRepository.save(community);
+	}
+	
 	
 	public void removeCommunity(Community community){
 		communityRepository.delete(community);
@@ -55,7 +60,8 @@ public class CommunityService {
 		return community;
 	}
 	
-	public void removeMember(int idUser,Community community){
+	public void removeMember(int idUser, int idCommunity){
+		Community community = sendCommunity(idCommunity);
 		ArrayList<Integer> members = community.getMembers();
 		for(int i=0;i<members.size();i++){
 			if(members.get(i) == idUser){
@@ -65,7 +71,8 @@ public class CommunityService {
 		}
 	}
 	
-	public void removePermission(int idUser,Community community){
+	public void removePermission(int idUser,int idCommunity){
+		Community community = sendCommunity(idCommunity);
 		ArrayList<Integer> permission = community.getPermissions();
 		for(int i=0;i<permission.size();i++){
 			if(permission.get(i) == idUser){
@@ -73,17 +80,5 @@ public class CommunityService {
 				break;
 			}
 		}
-	}
-	
-	public void addArticle(Community community, Article article){
-		
-	}
-	
-	public void addQuestion(Community community, Question question){
-		
-	}
-	
-	public void addTopic(Community community, TopicCommon topic){
-		
 	}
 }
