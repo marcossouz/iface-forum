@@ -6,9 +6,9 @@ public class RegisterQuestion {
 
 	private int idCommunity;
 	private Question question;
-	private User user;	
+	private int user;	
 	
-	public User getUser() {
+	public int getUser() {
 		return user;
 	}
 	public int getIdCommunity() {
@@ -23,7 +23,7 @@ public class RegisterQuestion {
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
-	public void setUser(User user) {
+	public void setUser(int user) {
 		this.user = user;
 	}
 }

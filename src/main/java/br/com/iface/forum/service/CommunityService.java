@@ -2,8 +2,6 @@ package br.com.iface.forum.service;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.com.iface.forum.model.Article;
 import br.com.iface.forum.model.Community;
 import br.com.iface.forum.repository.CommunityRepository;
 
@@ -23,16 +21,10 @@ public class CommunityService {
 	
 	public Community sendCommunity(int idCommunity){
 		return communityRepository.findOne(idCommunity);
-	}
-	public void addMember(int idMember, int idCommunity){
+	}	
+	
+	public void removeCommunity(int idCommunity){
 		Community community = sendCommunity(idCommunity);
-		community.addMember(idMember);
-		addCommunity(community);
-		communityRepository.save(community);
-	}
-	
-	
-	public void removeCommunity(Community community){
 		communityRepository.delete(community);
 	}
 	
@@ -60,25 +52,33 @@ public class CommunityService {
 		return community;
 	}
 	
+	public void addMember(int idMember, int idCommunity){
+		Community community = sendCommunity(idCommunity);
+		community.addMember(idMember);
+		addCommunity(community);
+		communityRepository.save(community);
+	}
+	
+	public void addPermission(int idMember, int idCommunity){
+		Community community = sendCommunity(idCommunity);
+		community.addPermission(idMember);
+		addCommunity(community);
+		communityRepository.save(community);
+	}
+	
 	public void removeMember(int idUser, int idCommunity){
 		Community community = sendCommunity(idCommunity);
 		ArrayList<Integer> members = community.getMembers();
-		for(int i=0;i<members.size();i++){
-			if(members.get(i) == idUser){
-				members.remove(i);
-				break;
-			}
-		}
+		members.remove(idUser);
+		community.setMembers(members);
+		communityRepository.save(community);
 	}
 	
 	public void removePermission(int idUser,int idCommunity){
 		Community community = sendCommunity(idCommunity);
-		ArrayList<Integer> permission = community.getPermissions();
-		for(int i=0;i<permission.size();i++){
-			if(permission.get(i) == idUser){
-				permission.remove(i);
-				break;
-			}
-		}
+		ArrayList<Integer> permissions = community.getPermissions();
+		permissions.remove(idUser);
+		community.setPermission(permissions);
+		communityRepository.save(community);
 	}
 }

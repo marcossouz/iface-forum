@@ -13,11 +13,20 @@ public class QuestionService {
 	@Autowired
 	QuestionRepository questionRepository;
 	
-	public void addQuestion(Question question){
+	@Autowired
+	CommunityService communityService;
+	
+	public void addQuestion(Question question,int idCommunity){
+		Community community = communityService.sendCommunity(idCommunity);
+		community.addQuestion(question.getIdTopic());
+		communityService.addCommunity(community);
 		questionRepository.save(question);
 	}
 	
-	public void removeQuestion(Question question){
+	public void removeQuestion(int question,int idCommunity){
+		Community community = communityService.sendCommunity(idCommunity);
+		community.removeQuestion(question);
+		communityService.addCommunity(community);
 		questionRepository.delete(question);
 	}
 	
@@ -25,7 +34,8 @@ public class QuestionService {
 		return questionRepository.findOne(idQuestion);
 	}
 	
-	public ArrayList<Question> allQuestions(Community community){
+	public ArrayList<Question> allQuestions(int idCommunity){
+		Community community = communityService.sendCommunity(idCommunity);
 		ArrayList<Integer> ids = community.allQuestions();
 		ArrayList<Question> allquestion = new ArrayList<Question>();
 		for(int i=0;i<ids.size();i++){
@@ -34,7 +44,7 @@ public class QuestionService {
 		return allquestion;
 	}
 	
-	public ArrayList<Question> questionByCreator(int idCreator,Community community){
+	public ArrayList<Question> questionByCreator(int idCreator,int community){
 		ArrayList<Question> question = new ArrayList<Question>();
 		ArrayList<Question> questionCommunity = allQuestions(community);
 		for(int i=0;i<questionCommunity.size();i++){

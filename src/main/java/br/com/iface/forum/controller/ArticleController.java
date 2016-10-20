@@ -1,4 +1,5 @@
 package br.com.iface.forum.controller;
+import br.com.iface.forum.information.RTopic;
 import br.com.iface.forum.information.RegisterArticle;
 import br.com.iface.forum.model.Article;
 import br.com.iface.forum.model.Community;
@@ -42,6 +43,11 @@ public class ArticleController {
 	@RequestMapping(method = RequestMethod.POST,value = "/article",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void addArticle(@RequestBody RegisterArticle register){
 		articleService.addArticle(register.getArticle(),register.getIdCommunity());
+	}
+	
+	@RequestMapping(method = RequestMethod.POST,value = "/articleR",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void removeArticle(@RequestBody RTopic article){
+		articleService.removeArticle(article.getIdTopic(),article.getIdCommunity());
 	}
 	
 }

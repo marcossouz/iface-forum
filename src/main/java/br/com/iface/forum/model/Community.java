@@ -44,6 +44,18 @@ public class Community {
 		return topics;
 	}
 	
+	public void removeArticle(int idArticle){
+		articles.remove(idArticle);
+	}
+	
+	public void removeQuestion(int idQuestion){
+		questions.remove(idQuestion);
+	}
+	
+	public void removeTopic(int idTopic){
+		topics.remove(idTopic);
+	}
+	
 	public void setIdCreator(int id){
 		this.idCreator = id;
 	}
@@ -66,6 +78,14 @@ public class Community {
 	
 	public void addPermission(int idUser){
 		this.permission.add(idUser);
+	}
+	
+	public void setMembers(ArrayList<Integer> newMembers){
+		this.members = newMembers;
+	}
+	
+	public void setPermission(ArrayList<Integer> newPermissions){
+		this.permission = newPermissions;
 	}
 	
 	public int getIdCreator(){

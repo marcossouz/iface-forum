@@ -1,5 +1,6 @@
 package br.com.iface.forum.controller;
-import br.com.iface.forum.model.Community;
+import br.com.iface.forum.information.RTopic;
+import br.com.iface.forum.information.RegisterQuestion;
 import br.com.iface.forum.model.Question;
 import br.com.iface.forum.service.QuestionService;
 import java.util.ArrayList;
@@ -27,14 +28,19 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/questions", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<Question>> allQuestions(@RequestBody Community community){
+	public ResponseEntity<ArrayList<Question>> allQuestions(@RequestBody int community){
 		ArrayList<Question> questions = questionService.allQuestions(community);
 		return new ResponseEntity<>(questions,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/question",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void addQuestion(@RequestBody Question question){
-		questionService.addQuestion(question);
+	public void addQuestion(@RequestBody RegisterQuestion question){
+		questionService.addQuestion(question.getQuestion(),question.getIdCommunity());
+	}
+	
+	@RequestMapping(method = RequestMethod.POST,value = "/questionR",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void removeQuestion(@RequestBody RTopic question){
+		questionService.removeQuestion(question.getIdTopic(),question.getIdCommunity());
 	}
 	
 }

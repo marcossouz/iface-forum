@@ -1,5 +1,6 @@
 package br.com.iface.forum.controller;
-import br.com.iface.forum.model.Community;
+import br.com.iface.forum.information.RTopic;
+import br.com.iface.forum.information.RegisterTopic;
 import br.com.iface.forum.model.TopicCommon;
 import br.com.iface.forum.service.TopicService;
 import java.util.ArrayList;
@@ -27,14 +28,19 @@ public class TopicController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/topics", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<TopicCommon>> allTopics(@RequestBody Community community){
+	public ResponseEntity<ArrayList<TopicCommon>> allTopics(@RequestBody int community){
 		ArrayList<TopicCommon> topics = topicService.allTopics(community);
 		return new ResponseEntity<>(topics,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/topic",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void addTopic(@RequestBody TopicCommon topic){
-		topicService.addTopic(topic);
+	public void addTopic(@RequestBody RegisterTopic topic){
+		topicService.addTopic(topic.getTopic(),topic.getIdCommunity());
+	}
+	
+	@RequestMapping(method = RequestMethod.POST,value = "/topicR",consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void removeTopic(@RequestBody RTopic topic){
+		topicService.removeTopic(topic.getIdTopic(),topic.getIdCommunity());
 	}
 
 }

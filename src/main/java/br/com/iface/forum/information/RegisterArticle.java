@@ -1,14 +1,17 @@
 package br.com.iface.forum.information;
 import br.com.iface.forum.model.Article;
-import br.com.iface.forum.model.User;
 
 public class RegisterArticle {
 	
 	private int idCommunity;
 	private Article article;
-	private User user;
+	private int user;
 	
-	public User getUser(){
+	public void setUser(int user){
+		this.user = user;
+	}
+	
+	public int getUser(){
 		return user; 
 	}
 	

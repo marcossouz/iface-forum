@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.iface.forum.information.InformationTopic;
+import br.com.iface.forum.information.Member;
 import br.com.iface.forum.model.Community;
 import br.com.iface.forum.service.CommunityService;
 
@@ -26,7 +27,7 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/removeCommunity",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public void removeCommunity(@RequestBody Community community){
+	public void removeCommunity(@RequestBody int community){
 		communityService.removeCommunity(community);
 	}
 	
@@ -64,12 +65,12 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/Mypermissions",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Integer> permissionById(@RequestBody InformationTopic Information){
-		ArrayList<Community> communities = communityService.allCommunity();
-		ArrayList<Integer> myPermissions = communities.get(Information.getIdCommunity()).getPermissions();	
+	public ResponseEntity<Integer> permissionById(@RequestBody Member Information){
+		Community community = communityService.sendCommunity(Information.getIdCommunity());
+		ArrayList<Integer> myPermissions = community.getPermissions();
 		Integer answer;
 		for(int i=0;i<myPermissions.size();i++){
-			if(myPermissions.get(i)== Information.getUser().getId()){
+			if(myPermissions.get(i)== Information.getIdMember()){
 				answer = 1;
 				break;
 			}
@@ -79,11 +80,11 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/creator",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public ResponseEntity<Integer> creatorById(@RequestBody InformationTopic information){	
+	public ResponseEntity<Integer> creatorById(@RequestBody int idUser){	
 		ArrayList<Community> communities = communityService.allCommunity();
 		Integer answer;
-		for(int i=0;i<information.getIdCommunity()-1;i++){
-			if(communities.get(i).getIdCreator() == information.getUser().getId()){
+		for(int i=0;i<communities.size();i++){
+			if(communities.get(i).getIdCreator() == idUser){
 				answer = 1;
 				break;
 			}
@@ -98,23 +99,23 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/addPermission",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public void addPermission(@RequestBody InformationTopic Information){
-		Information.getUser().getCommunity(Information.getIdCommunity()).addPermission(Information.getUser().getId());
+	public void addPermission(@RequestBody Member Information){
+		communityService.addPermission(Information.getIdMember(), Information.getIdCommunity());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/removePermission",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public void removePermission(@RequestBody InformationTopic Information){
-		communityService.removePermission(Information.getUser().getId(),Information.getUser().getCommunity(Information.getIdCommunity()));
+	public void removePermission(@RequestBody Member Information){
+		communityService.removePermission(Information.getIdMember(),Information.getIdCommunity());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/addMember",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public void addMember(@RequestBody InformationTopic Information){
-		Information.getUser().getCommunity(Information.getIdCommunity()).addMember(Information.getUser().getId());
+	public void addMember(@RequestBody Member Information){
+		communityService.addMember(Information.getIdMember(), Information.getIdCommunity());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/removeMember",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public void removeMember(@RequestBody InformationTopic Information){
-		communityService.removeMember(Information.getUser().getId(),Information.getUser().getCommunity(Information.getIdCommunity()));
+	public void removeMember(@RequestBody Member Information){
+		communityService.removeMember(Information.getIdMember(),Information.getIdCommunity());
 	}
 
 }

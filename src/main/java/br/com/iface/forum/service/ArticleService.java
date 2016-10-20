@@ -23,7 +23,10 @@ public class ArticleService {
 		articleRepository.save(article);
 	}
 	
-	public void removeArticle(Article article){
+	public void removeArticle(int article,int idCommunity){
+		Community community = communityService.sendCommunity(idCommunity);
+		community.removeArticle(article);
+		communityService.addCommunity(community);
 		articleRepository.delete(article);
 	}
 	

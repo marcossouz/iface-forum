@@ -10,7 +10,7 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private static int id;
+	private int id;
 	private String name;
 	private static List<Integer> communities;
 		
@@ -18,7 +18,7 @@ public class User {
 		return id;
 	}
 	public void setId(int id) {
-		User.id = id;
+		this.id = id;
 	}
 	public String getName() {
 		return name;
