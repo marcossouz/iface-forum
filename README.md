@@ -18,7 +18,3 @@ O usuário do fórum da rede iFace deverá poder:
   **Criar tópico de pergunta**, caso haja uma dúvida especifica, a qual poderá ser respondida por qualquer membro participante da comunidade. As respostas avaliadas ficarão em ordem decrescente de avaliação.
   
   **Responder a um tópico.** O usuário inserido em uma comunidade que possui um determinado tópico de discussão criado poderá responder (quantas vezes for necessário) a esse tópico. Assim, o usuário poderá criar uma resposta que contém um conteúdo e uma avaliação.
-  
-  **Avaliar a resposta** de outro usuário em um determinado tópico. O usuário inscrito em uma comunidade poderá avaliar a resposta a um tópico feita por outro usuário.
-
-
