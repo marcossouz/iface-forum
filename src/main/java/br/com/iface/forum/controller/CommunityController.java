@@ -4,17 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.iface.forum.information.IdCommunity;
+import br.com.iface.forum.information.IdUser;
 import br.com.iface.forum.information.InformationTopic;
 import br.com.iface.forum.information.Member;
 import br.com.iface.forum.model.Community;
 import br.com.iface.forum.service.CommunityService;
 
-@Controller
 @RestController
 public class CommunityController {
 		
@@ -25,10 +26,16 @@ public class CommunityController {
 	public void addCommunity(@RequestBody Community community){
 		communityService.addCommunity(community);
 	}
+
+	@RequestMapping(method = RequestMethod.GET,value = "/allCommunities",produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<Community>> allCommunities(){
+		ArrayList<Community> communities = communityService.allCommunity();
+		return new ResponseEntity<>(communities,HttpStatus.OK);
+	}	
 	
-	@RequestMapping(method = RequestMethod.GET,value="/removeCommunity",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public void removeCommunity(@RequestBody int community){
-		communityService.removeCommunity(community);
+	@RequestMapping(method = RequestMethod.POST,value="/removeCommunity",consumes = MediaType.APPLICATION_JSON_VALUE)	
+	public void removeCommunity(@RequestBody IdCommunity community){
+		communityService.removeCommunity(community.getIdCommunity());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/myComunities",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -37,9 +44,9 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value = "/othersCommunities",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<Community>> searchOthersCommunities(@RequestBody int idUser){
+	public ResponseEntity<ArrayList<Community>> searchOthersCommunities(@RequestBody IdUser idUser){
 		ArrayList<Community> others = new ArrayList<Community>();
-		ArrayList<Community> myCommunities = communityService.CommunityByCreator(idUser);
+		ArrayList<Community> myCommunities = communityService.CommunityByCreator(idUser.getIdUser());
 		ArrayList<Community> communities = communityService.allCommunity();
 		boolean aux;		
 		for(int i=0;i<communities.size();i++){
@@ -58,10 +65,10 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/Allpermissions",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<Integer>> allPermissions(@RequestBody int idCommunity){
+	public ResponseEntity<ArrayList<Integer>> allPermissions(@RequestBody IdCommunity idCommunity){
 		ArrayList<Community> communities = communityService.allCommunity();
-		idCommunity--;
-		return new ResponseEntity<>(communities.get(idCommunity).getPermissions(),HttpStatus.OK);
+		idCommunity.setIdCommunity(idCommunity.getIdCommunity()-1);
+		return new ResponseEntity<>(communities.get(idCommunity.getIdCommunity()).getPermissions(),HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/Mypermissions",consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -80,11 +87,11 @@ public class CommunityController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value="/creator",consumes = MediaType.APPLICATION_JSON_VALUE)	
-	public ResponseEntity<Integer> creatorById(@RequestBody int idUser){	
+	public ResponseEntity<Integer> creatorById(@RequestBody IdUser idUser){	
 		ArrayList<Community> communities = communityService.allCommunity();
 		Integer answer;
 		for(int i=0;i<communities.size();i++){
-			if(communities.get(i).getIdCreator() == idUser){
+			if(communities.get(i).getIdCreator() == idUser.getIdUser()){
 				answer = 1;
 				break;
 			}
@@ -98,7 +105,7 @@ public class CommunityController {
 		return new ResponseEntity<>(information.getUser().getCommunity(information.getIdCommunity()),HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET,value="/addPermission",consumes = MediaType.APPLICATION_JSON_VALUE)	
+	@RequestMapping(method = RequestMethod.POST,value="/addPermission",consumes = MediaType.APPLICATION_JSON_VALUE)	
 	public void addPermission(@RequestBody Member Information){
 		communityService.addPermission(Information.getIdMember(), Information.getIdCommunity());
 	}

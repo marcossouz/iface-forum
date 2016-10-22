@@ -2,8 +2,6 @@ package br.com.iface.forum.service;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.com.iface.forum.model.Community;
 import br.com.iface.forum.model.TopicCommon;
 import br.com.iface.forum.repository.TopicRepository;
 
@@ -11,37 +9,34 @@ import br.com.iface.forum.repository.TopicRepository;
 public class TopicService {
 
 	@Autowired
-	static TopicRepository topicRepository;
-	
-	@Autowired
-	static CommunityService communityService;
-			
-	public void addTopic(TopicCommon topic,int idCommunity){
-		Community community = communityService.sendCommunity(idCommunity);
-		community.addTopic(topic.getIdTopic());
-		communityService.addCommunity(community);
+	TopicRepository topicRepository;
+				
+	public void addTopic(TopicCommon topic){
 		topicRepository.save(topic);
 	}
 	
-	public void removeTopic(int topic,int idCommunity){
-		Community community = communityService.sendCommunity(idCommunity);
-		community.removeTopic(topic);
-		communityService.addCommunity(community);
+	public void removeTopic(int topic){
 		topicRepository.delete(topic);
 	}
 	
-	public static TopicCommon sendTopic(int idTopic){
+	public TopicCommon sendTopic(int idTopic){
 		return topicRepository.findOne(idTopic);
 	}
 	
+	public ArrayList<TopicCommon> allTopics(){
+		ArrayList<TopicCommon> topic = (ArrayList<TopicCommon>) topicRepository.findAll();
+		return topic;
+	}
+	
 	public ArrayList<TopicCommon> allTopics(int idCommunity){
-		Community community = communityService.sendCommunity(idCommunity);
-		ArrayList<Integer> ids = community.allTopics();
-		ArrayList<TopicCommon> alltopics = new ArrayList<TopicCommon>();
-		for(int i=0;i<ids.size();i++){
-			alltopics.add(sendTopic(ids.get(i)));
+		ArrayList<TopicCommon> topic = allTopics();
+		ArrayList<TopicCommon> resp = new ArrayList<TopicCommon>();
+		for(int i=0;i<topic.size();i++){
+			if(topic.get(i).getIdCommunity()==idCommunity){
+				resp.add(topic.get(i));
+			}
 		}
-		return alltopics;
+		return resp;
 	}
 	
 	public ArrayList<TopicCommon> topicByCreator(int creator,int idCommunity){

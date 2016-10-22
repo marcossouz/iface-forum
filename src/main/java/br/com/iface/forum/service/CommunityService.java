@@ -24,8 +24,7 @@ public class CommunityService {
 	}	
 	
 	public void removeCommunity(int idCommunity){
-		Community community = sendCommunity(idCommunity);
-		communityRepository.delete(community);
+		communityRepository.delete(idCommunity);
 	}
 	
 	public ArrayList<Community> communitiesByIdUser(int idUser){
@@ -60,7 +59,8 @@ public class CommunityService {
 	}
 	
 	public void addPermission(int idMember, int idCommunity){
-		Community community = sendCommunity(idCommunity);
+		Community community = new Community();
+		community = sendCommunity(idCommunity);
 		community.addPermission(idMember);
 		addCommunity(community);
 		communityRepository.save(community);

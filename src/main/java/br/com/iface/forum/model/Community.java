@@ -13,49 +13,10 @@ public class Community {
 	private String title;
 	private String description;
 	private int idCreator;
-	private ArrayList<Integer> topics = new ArrayList<Integer>();
-	private ArrayList<Integer> questions = new ArrayList<Integer>();
-	private ArrayList<Integer> articles = new ArrayList<Integer>();
     private ArrayList<Integer> members = new ArrayList<Integer>();
 	private ArrayList<Integer> permission = new ArrayList<Integer>();
 	
 		
-	public void addArticle(Integer article){
-		articles.add(article);
-	}
-	
-	public void addQuestion(Integer question){
-		questions.add(question);
-	}
-	
-	public void addTopic(Integer topic){
-		topics.add(topic);
-	}
-	
-	public ArrayList<Integer> allArticles(){
-		return articles;
-	}
-	
-	public ArrayList<Integer> allQuestions(){
-		return questions;
-	}
-	
-	public ArrayList<Integer> allTopics(){
-		return topics;
-	}
-	
-	public void removeArticle(int idArticle){
-		articles.remove(idArticle);
-	}
-	
-	public void removeQuestion(int idQuestion){
-		questions.remove(idQuestion);
-	}
-	
-	public void removeTopic(int idTopic){
-		topics.remove(idTopic);
-	}
-	
 	public void setIdCreator(int id){
 		this.idCreator = id;
 	}

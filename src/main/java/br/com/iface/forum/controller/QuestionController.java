@@ -1,6 +1,6 @@
 package br.com.iface.forum.controller;
-import br.com.iface.forum.information.RTopic;
-import br.com.iface.forum.information.RegisterQuestion;
+import br.com.iface.forum.information.IdArticle;
+import br.com.iface.forum.information.IdCommunity;
 import br.com.iface.forum.model.Question;
 import br.com.iface.forum.service.QuestionService;
 import java.util.ArrayList;
@@ -22,25 +22,25 @@ public class QuestionController {
 	QuestionService questionService;
 	
 	@RequestMapping(method = RequestMethod.GET,value = "/question",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Question> SendQuestion(@RequestBody int idQuestion){
-		Question question = questionService.sendQuestion(idQuestion);
+	public ResponseEntity<Question> SendQuestion(@RequestBody IdArticle idQuestion){
+		Question question = questionService.sendQuestion(idQuestion.getIdArticle());
 		return new ResponseEntity<>(question,HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/questions", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ArrayList<Question>> allQuestions(@RequestBody int community){
-		ArrayList<Question> questions = questionService.allQuestions(community);
+	@RequestMapping(method = RequestMethod.POST, value = "/questions", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ArrayList<Question>> allQuestions(@RequestBody IdCommunity community){
+		ArrayList<Question> questions = questionService.allQuestion(community.getIdCommunity());
 		return new ResponseEntity<>(questions,HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/question",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void addQuestion(@RequestBody RegisterQuestion question){
-		questionService.addQuestion(question.getQuestion(),question.getIdCommunity());
+	public void addQuestion(@RequestBody Question question){
+		questionService.addQuestion(question);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/questionR",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void removeQuestion(@RequestBody RTopic question){
-		questionService.removeQuestion(question.getIdTopic(),question.getIdCommunity());
+	public void removeQuestion(@RequestBody IdArticle question){
+		questionService.removeQuestion(question.getIdArticle());
 	}
 	
 }

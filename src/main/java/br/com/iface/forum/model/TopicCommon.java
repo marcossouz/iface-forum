@@ -6,21 +6,22 @@ import javax.persistence.Id;
 
 @Entity
 public class TopicCommon{
-	
+
 	@Id
 	@GeneratedValue
-	private int idTopic;
+	private int topic;
+	private int idCommunity;
 	private int idCreator;
-	private String description;;
+	private String description;
 	private String title;
 	private ArrayList<Integer> answers = new ArrayList<Integer>();
 
 	public int getIdTopic() {
-		return idTopic;
+		return topic;
 	}
 
 	public void setIdTopic(int idTopic) {
-		this.idTopic = idTopic;
+		this.topic = idTopic;
 	}
 
 	public int getIdCreator() {
@@ -61,6 +62,14 @@ public class TopicCommon{
 		
 	public ArrayList<Integer> getAnswer(){
 		return this.answers;
+	}
+	
+	public int getIdCommunity() {
+		return idCommunity;
+	}
+
+	public void setIdCommunity(int idCommunity) {
+		this.idCommunity = idCommunity;
 	}
 
 }

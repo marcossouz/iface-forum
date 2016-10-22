@@ -10,6 +10,7 @@ public class Question{
 	@Id
 	@GeneratedValue
 	private int idTopic;
+	private int idCommunity;
 	private int idCreator;
 	private String description;;
 	private String title;
@@ -65,5 +66,13 @@ public class Question{
 		
 	public ArrayList<Integer> getAnswer(){
 		return this.answers;
+	}
+	
+	public int getIdCommunity() {
+		return idCommunity;
+	}
+
+	public void setIdCommunity(int idCommunity) {
+		this.idCommunity = idCommunity;
 	}
 }
